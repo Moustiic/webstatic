@@ -2,7 +2,7 @@ pipeline {
     environment {
         PROJECT = "moustiic"
         APP_NAME = "webstatic"
-        IMAGE_TAG = "${PROJECT}/${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+        IMAGE_TAG = "${PROJECT}/${APP_NAME}:v.${env.BUILD_NUMBER}"
     }
     agent { label 'docker' }
 
