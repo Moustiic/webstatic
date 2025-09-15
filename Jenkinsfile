@@ -1,11 +1,16 @@
 pipeline {
+    environment {
+        PROJECT = "moustiic"
+        APP_NAME = "webstatic"
+        IMAGE_TAG = "${PROJECT}/${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+    }
     agent { label 'docker' }
 
     stages {
         stage('Build Image') {
             steps {
                 echo "${env.DEPLOY_VERSION}"
-                sh 'docker build -t moustiic/webstatic:v1.1 .'
+                sh 'docker build -t ${IMAGE_TAG} .'
             }
         }
         stage('Push Image'){
@@ -14,7 +19,7 @@ pipeline {
                     }
             steps{
                sh 'echo ${DOCKER_HUB_PSW} | docker login -u ${DOCKER_HUB_USR} --password-stdin'
-               sh "docker push moustiic/webstatic:v1.1"
+               sh "docker push ${IMAGE_TAG}"
             }
         }
     }
