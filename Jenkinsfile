@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build Image') {
             steps {
-                echo ${env.BUILD_TAG}
+                echo "${env.BUILD_TAG}"
                 sh 'docker build -t moustiic/webstatic:v1.1 .'
             }
         }
