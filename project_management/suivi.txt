@@ -1,0 +1,11 @@
+Schema architecture simplifié -> OK
+Configuration GIT local -> OK
+Configuration GITHUB -> OK
+Fork du projet de SAMIR -> OK
+
+TO DO 
+Installation Jenkins
+Installation minikube
+Creation image docker
+Hebergement image docker
+Creation pipeline Jenkins
