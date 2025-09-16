@@ -2,7 +2,8 @@ pipeline {
     environment {
         PROJECT = "moustiic"
         APP_NAME = "webstatic"
-        IMAGE_TAG = "${PROJECT}/${APP_NAME}:v.${env.BUILD_NUMBER}"
+        IMAGE_TAG_VERSION = "${PROJECT}/${APP_NAME}:v.${env.BUILD_NUMBER}"
+        IMAGE_TAG_LATEST = "${PROJECT}/${APP_NAME}:latest"
     }
     agent { label 'docker' }
 
@@ -10,7 +11,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 echo "${env.DEPLOY_VERSION}"
-                sh 'docker build -t ${IMAGE_TAG} .'
+                sh 'docker build -t ${IMAGE_TAG_VERSION} -t ${IMAGE_TAG_LATEST} .'
             }
         }
         
