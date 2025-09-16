@@ -30,7 +30,8 @@ pipeline {
         stage('Deploy webstatic') {
             steps {
                 withKubeConfig(caCertificate: '', clusterName: 'minikube', contextName: 'minikube', credentialsId: 'minikube', namespace: 'dev', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.58.2:8443') {
-                    sh "minikube kubectl -- apply -f ./kubernetes/deployment.yaml"
+                    sh 'minikube kubectl -- apply -f ./kubernetes/deployment.yaml'
+                    sh 'minikube kubectl -- rollout status deployment/webstatic-deployment -n dev --timeout=120s'
                 }
             }
         }
