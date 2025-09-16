@@ -11,7 +11,8 @@ pipeline {
         stage('Build Image') {
             steps {
                 echo "${env.DEPLOY_VERSION}"
-                sh 'docker build -t ${IMAGE_TAG_VERSION} -t ${IMAGE_TAG_LATEST} .'
+                sh 'docker build -t ${IMAGE_TAG_VERSION} .'
+                sh 'docker tag ${IMAGE_TAG_VERSION} ${IMAGE_TAG_LATEST}'
             }
         }
         
@@ -21,7 +22,7 @@ pipeline {
                     }
             steps{
                sh 'echo ${DOCKER_HUB_PSW} | docker login -u ${DOCKER_HUB_USR} --password-stdin'
-               sh "docker push ${IMAGE_TAG}"
+               sh "docker push ${IMAGE_TAG_VERSION}"
             }
         }
 
