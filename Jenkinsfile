@@ -37,12 +37,9 @@ pipeline {
         
         stage('Check Deploy') {
             steps {
-                sh '''
-                    set +x
-                    sleep 5
-                    curl -s 192.168.58.2:31000 |grep -q "image docker" && echo "TEST OK" || { echo "TEST KO" && exit 1; }
-                    curl -s 192.168.58.2:31000 |grep "Version"
-                '''
+                sh 'sleep 5'
+                sh 'curl -s 192.168.58.2:31000 |grep -q "image docker" && echo "TEST OK" || { echo "TEST KO" && exit 1; }'
+                sh 'curl -s 192.168.58.2:31000 |grep "Version"'
             }
         }
     }
