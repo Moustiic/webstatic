@@ -39,7 +39,7 @@ pipeline {
             steps {
                 sh 'sleep 5'
                 sh 'curl -s 192.168.58.2:31000 |grep -q "image docker" && echo "TEST OK" || { echo "TEST KO" && exit 1; }'
-                sh 'curl -s 192.168.58.2:31000 |grep -q "Version"'
+                sh 'curl -s 192.168.58.2:31000 |grep "Version"'
             }
         }
     }
