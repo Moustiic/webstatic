@@ -13,6 +13,7 @@ pipeline {
                 sh 'docker build -t ${IMAGE_TAG} .'
             }
         }
+        
         stage('Push Image'){
         environment{
                         DOCKER_HUB = credentials('docker-hub-creds')
@@ -22,10 +23,11 @@ pipeline {
                sh "docker push ${IMAGE_TAG}"
             }
         }
-        stage('Test') {
+
+        stage('Deploy webstatic') {
             steps {
                 withKubeConfig(caCertificate: '', clusterName: 'minikube', contextName: 'minikube', credentialsId: 'minikube', namespace: 'dev', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.58.2:8443') {
-                    sh "minikube kubectl -- get ns"
+                    sh "minikube kubectl -- apply -f ./kubernetes/deployment.yaml"
                 }
             }
         }
