@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: webstatic-deployment
-        image: moustiic/webstatic
+        image: moustiic/webstatic:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
