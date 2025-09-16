@@ -24,7 +24,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                withKubeConfig(caCertificate: '', clusterName: 'minikube', contextName: 'minikube', credentialsId: 'Jenkins', namespace: 'dev', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.58.2:8443') {
+                withKubeConfig(caCertificate: '', clusterName: 'minikube', contextName: 'minikube', credentialsId: 'minikube', namespace: 'dev', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.58.2:8443') {
                     sh "minikube kubectl -- get ns"
                 }
             }
