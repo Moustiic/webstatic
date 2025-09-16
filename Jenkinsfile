@@ -22,6 +22,13 @@ pipeline {
                sh "docker push ${IMAGE_TAG}"
             }
         }
+        stage('Test') {
+            steps {
+                withKubeConfig(caCertificate: '', clusterName: 'minikube', contextName: 'minikube', credentialsId: 'Jenkins', namespace: 'dev', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.58.2:8443') {
+                    sh "kubectl get ns"
+                }
+            }
+        }
     }
     post {
            always {
