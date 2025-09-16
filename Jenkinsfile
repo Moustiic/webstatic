@@ -11,7 +11,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 echo "${env.DEPLOY_VERSION}"
-                sh 'sed -i \'s/__VERSION/${IMAGE_TAG_VERSION}/g\' ./html/index.html'
+                sh 'sed -i "s/__VERSION/${IMAGE_TAG_VERSION}/g" ./html/index.html'
                 sh 'docker build -t ${IMAGE_TAG_VERSION} .'
                 sh 'docker tag ${IMAGE_TAG_VERSION} ${IMAGE_TAG_LATEST}'
             }
