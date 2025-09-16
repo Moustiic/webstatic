@@ -23,6 +23,7 @@ pipeline {
             steps{
                sh 'echo ${DOCKER_HUB_PSW} | docker login -u ${DOCKER_HUB_USR} --password-stdin'
                sh "docker push ${IMAGE_TAG_VERSION}"
+               sh "docker push ${IMAGE_TAG_LATEST}"
             }
         }
 
